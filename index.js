@@ -15,6 +15,8 @@ spellCorrector.loadDictionary();
 const SW = require('stopword');
 const customStopWords = ['yeah' ,'please']
 
+module.exports.AnalyzeSentiment = function(lyrics) {
+/*
 lyrics = `Love of mine
 Someday you will die
 But I'll be close behind
@@ -35,6 +37,7 @@ And if Heaven and Hell decide that they both are satisfied
 Illuminate the no's on their vacancy signs
 If there's no one beside you when your soul embarks
 Then I'll follow you into the dark`
+*/
 
 wordsToReview = (aposToLexForm(lyrics.replace(/\n/g, " ")).toLowerCase());
 wordsToReview = wordsToReview.replace(/[^a-zA-Z\s]+/g, '')
@@ -59,8 +62,14 @@ filteredReview.forEach((word, index) => {
 
 console.log(filteredReview)
 
-console.log(analyzer.getSentiment(filteredReview));
+console.log('sa:',analyzer.getSentiment(filteredReview));
 // 0.6666666666666666
 
+return ''+analyzer.getSentiment(filteredReview);
+
+}
+
+// export default AnalyzeSentiment;
+// exports.AnalyzeSentiment = AnalyzeSentiment;
 // angry -1
 // happy +1
