@@ -1,3 +1,5 @@
+var log = require('log4js').getLogger("http");
+
 const natural = require('natural');
 const Analyzer = require('natural').SentimentAnalyzer;
 const aposToLexForm = require('apos-to-lex-form');
@@ -14,6 +16,9 @@ spellCorrector.loadDictionary();
 
 const SW = require('stopword');
 const customStopWords = ['yeah' ,'please']
+
+// Import the logger
+const logger = require('./modules/logger');
 
 module.exports.AnalyzeSentiment = function(lyrics) {
 /*
@@ -39,37 +44,29 @@ If there's no one beside you when your soul embarks
 Then I'll follow you into the dark`
 */
 
-wordsToReview = (aposToLexForm(lyrics.replace(/\n/g, " ")).toLowerCase());
-wordsToReview = wordsToReview.replace(/[^a-zA-Z\s]+/g, '')
-console.log(wordsToReview)
-const tokenizedReview = tokenizer.tokenize(wordsToReview);
-let filteredReview = SW.removeStopwords(tokenizedReview, [...SW.en, ...customStopWords]);
+  wordsToReview = (aposToLexForm(lyrics.replace(/\n/g, " ")).toLowerCase());
+  wordsToReview = wordsToReview.replace(/[^a-zA-Z\s]+/g, '')
+  console.log(wordsToReview)
+  const tokenizedReview = tokenizer.tokenize(wordsToReview);
+  let filteredReview = SW.removeStopwords(tokenizedReview, [...SW.en, ...customStopWords]);
 
-// Remove duplicates 
-// filteredReview = filteredReview.filter((c, index) => {
-//   return filteredReview.indexOf(c) === index;
-// });
+  // Remove duplicates 
+  // filteredReview = filteredReview.filter((c, index) => {
+  //   return filteredReview.indexOf(c) === index;
+  // });
 
-// Show ranking for each word
-// filteredReview.forEach((word, index) => {
-//   console.log(spellCorrector.correct(word) + ' (' + analyzer.getSentiment([spellCorrector.correct(word)]) + ')')
-// })
+  // Show ranking for each word
+  // filteredReview.forEach((word, index) => {
+  //   console.log(spellCorrector.correct(word) + ' (' + analyzer.getSentiment([spellCorrector.correct(word)]) + ')')
+  // })
 
+  filteredReview.forEach((word, index) => {
+    filteredReview[index] = spellCorrector.correct(word);
+  })
 
-filteredReview.forEach((word, index) => {
-  filteredReview[index] = spellCorrector.correct(word);
-})
+  var saRank = analyzer.getSentiment(filteredReview);
 
-console.log(filteredReview)
+  logger.app.info('\n', wordsToReview,  '\n', 'sa:', saRank);
 
-console.log('sa:',analyzer.getSentiment(filteredReview));
-// 0.6666666666666666
-
-return ''+analyzer.getSentiment(filteredReview);
-
+  return ''+ saRank;
 }
-
-// export default AnalyzeSentiment;
-// exports.AnalyzeSentiment = AnalyzeSentiment;
-// angry -1
-// happy +1
