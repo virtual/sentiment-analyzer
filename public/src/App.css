@@ -1,13 +1,25 @@
+* {
+  box-sizing: border-box;
+}
 .App {
-  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
   
 .App-header {
   background-color: #282c34;  
-  font-size: calc(10px + 2vmin);
   color: white;
+  padding: 10px 30px;
 }
-
+h1 {
+  font-size: calc(10px + 2vmin);
+}
+main {
+  flex-grow: 1;
+  padding: 30px;
+  width: 100%;
+}
 .App-link {
   color: #61dafb;
 }
