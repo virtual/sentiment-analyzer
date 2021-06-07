@@ -4,17 +4,17 @@ class FormLyrics extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      wordsInput: '',
       sentiment: '0'
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleWordsChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSA = this.updateSA.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleWordsChange(event) {
+    this.setState({wordsInput: event.target.value});
   }
 
   updateSA(saValue) {
@@ -58,7 +58,7 @@ class FormLyrics extends Component {
           <label>
             <small>Words:</small>
             <br/>
-            <textarea rows="10" type="text" value={this.state.value} onChange={this.handleChange} />
+            <textarea rows="10" type="text" value={this.state.wordsInput} onChange={this.handleWordsChange} />
           </label>
           <br/>
           <input type="submit" value="Submit" />
