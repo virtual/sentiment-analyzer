@@ -8,7 +8,7 @@ class FormLyrics extends Component {
       sentiment: '0'
     };
 
-    this.handleWordsChange = this.handleChange.bind(this);
+    this.handleWordsChange = this.handleWordsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSA = this.updateSA.bind(this);
   }
