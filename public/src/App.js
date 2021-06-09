@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./App.css";
 import FormLyrics from './FormLyrics';
+import ArtCanvas from './ArtCanvas';
 
 class App extends Component {
   constructor(props) {
@@ -47,19 +48,25 @@ class App extends Component {
 
   render() {
     var saPct = (this.state.sentiment*100).toFixed(1) + "%";
-
+    var allowedShapes = ['star', 'circle']
     return (
-      <div className="App" style={{backgroundColor: this.state.bgHue}}>
+      <div className="App">
+        <ArtCanvas
+        allowedShapes={allowedShapes}
+        bgHue={this.state.bgHue}
+            wordsInput={this.state.wordsInput}
+            />
         <header className="App-header">
           <h1>Sentiment Analyzer</h1>
         </header>
-        <main>
+        <main >
           <FormLyrics 
             wordsInput={this.state.wordsInput}
             sentiment={saPct}
             onWordsChange={this.onWordsChange} 
             updateSA={this.updateSA}
             />
+            
         </main>
       </div>
     );

@@ -1,0 +1,20 @@
+.artCanvas {
+  /* position: relative;
+  background: #f10377;
+  flex: 1; */
+  position: absolute;
+  /* background: #f10377; */
+  flex: 1 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* z-index: 0; */
+}
+img {
+  opacity: .3;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 3;
+}
