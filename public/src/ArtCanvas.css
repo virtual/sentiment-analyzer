@@ -12,9 +12,14 @@
   /* z-index: 0; */
 }
 img {
-  opacity: .3;
+  opacity: 0;
   width: 20px;
   height: 20px;
   position: absolute;
   z-index: 3;
+  animation:pop-in 0.5s forwards;
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
 }

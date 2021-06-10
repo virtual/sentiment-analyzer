@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       wordsInput: '',
       sentiment: '0',
-      bgHue: 'hsl(161, 17%, 88%)'
+      bgHue: 'hsl(161, 17%, 88%)',
+      shapeWords: ''
     };
 
     this.onWordsChange = this.onWordsChange.bind(this);
@@ -42,7 +43,8 @@ class App extends Component {
 
     this.setState({
       sentiment: saValue,
-      bgHue: newHSL
+      bgHue: newHSL,
+      shapeWords: this.state.wordsInput
     });
   }
 
@@ -52,14 +54,16 @@ class App extends Component {
     return (
       <div className="App">
         <ArtCanvas
-        allowedShapes={allowedShapes}
-        bgHue={this.state.bgHue}
-            wordsInput={this.state.wordsInput}
-            />
+          allowedShapes={allowedShapes}
+          bgHue={this.state.bgHue}
+          wordsInput={this.state.wordsInput}
+          shapeWords={this.state.shapeWords}
+          />
+            
         <header className="App-header">
           <h1>Sentiment Analyzer</h1>
         </header>
-        <main >
+        <main>
           <FormLyrics 
             wordsInput={this.state.wordsInput}
             sentiment={saPct}

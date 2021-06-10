@@ -24,20 +24,28 @@ class ArtCanvas extends Component {
   //   x = Math.random() * x;
   //   return x;
   // }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.wordsInput === nextProps.shapeWords) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   render() {
     const shapes = this.props.allowedShapes;
     let html = [];
+    let counter = 0;
     shapes.forEach(element => {
       let count = ((this.props.wordsInput.match(new RegExp(element, "g")) || []).length); //logs 4
       for (var i = 0; i < count; i++){
-        html.push(<Shape shape={element} key={Math.random()} />);
+        html.push(<Shape key={Math.random()} shape={element} counter={counter} />);
+        counter++;
       }
     });
     return (
       <div className="artCanvas" style={{backgroundColor: this.props.bgHue}}>
-{html}
-        
+        {html}
       </div>
     );
   }

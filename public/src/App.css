@@ -23,6 +23,9 @@ main {
   display: flex;
   flex-direction: column;
 }
+main p {
+  z-index: 1;
+}
 .App-link {
   color: #61dafb;
 }

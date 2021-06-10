@@ -33,9 +33,11 @@ class Shape extends Component {
     var filepath = './'+this.props.shape+'.svg';
     let xPos = this.randomizeXPos();
     let yPos = this.randomizeYPos();
+    let size = String(Math.random() * 40) + 'px';
+    let delay = String(.3 * parseInt(this.props.counter)) + 's';
     return (
       <div className="shape">
-        <img style={{top: xPos, left: yPos}} onClick={this.handleSVGClick} src={filepath} alt={filepath}/>
+        <img style={{height: size, width: size, top: xPos, left: yPos, animationDelay: delay}} onClick={this.handleSVGClick} src={filepath} alt={filepath}/>
       </div>
     );
   }
