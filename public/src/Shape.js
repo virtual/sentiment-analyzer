@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import * as Tone from 'tone';
+const synth = new Tone.Synth().toDestination();
 // import "./Shape.css";
 class Shape extends Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class Shape extends Component {
     this.handleSVGClick = this.handleSVGClick.bind(this);
     this.randomizeXPos = this.randomizeXPos.bind(this);
     this.randomizeYPos = this.randomizeYPos.bind(this);
+    this.playNote = this.playNote.bind(this);
   }
 
   handleSVGClick(event) {
@@ -29,6 +32,14 @@ class Shape extends Component {
     return y;
   }
 
+  playNote() {
+    const notes = ["A", "B", "C", "D", "E", "F", "G"];
+    const random = Math.floor(Math.random() * notes.length);
+    const key = Math.floor(Math.random() * 4) + 2;
+    let note = notes[random] + key; 
+    synth.triggerAttackRelease(note, "8n");
+  }
+
   render() {
     var filepath = './'+this.props.shape+'.svg';
     let xPos = this.randomizeXPos();
@@ -36,8 +47,8 @@ class Shape extends Component {
     let size = String(Math.random() * 40) + 'px';
     let delay = String(.3 * parseInt(this.props.counter)) + 's';
     return (
-      <div className="shape">
-        <img style={{height: size, width: size, top: xPos, left: yPos, animationDelay: delay}} onClick={this.handleSVGClick} src={filepath} alt={filepath}/>
+      <div style={{top: xPos, left: yPos}} className="shape" onClick={this.playNote}>
+        <img style={{height: size, width: size, animationDelay: delay}} onClick={this.handleSVGClick} src={filepath} alt={filepath}/>
       </div>
     );
   }
